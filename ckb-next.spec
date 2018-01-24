@@ -92,6 +92,7 @@ Buildroot: %{name}-%{version}
 %setup -n %{name}
 # Create a git repo within the expanded tarball.
 git init
+git config --global init.defaultBranch main
 git config user.email "r4u1974@gmail.com"
 git config user.name "Raul Vilchez"
 git add .
