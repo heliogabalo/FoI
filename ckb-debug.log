@@ -1,25 +1,25 @@
 #############################################
-#	
+#
 #	Important information regarding macOS.
-# macOS is no longer officially supported. 
-# For more information, please refer to 
+# macOS is no longer officially supported.
+# For more information, please refer to
 # [issue #660](https://github.com/ckb-next/ckb-next/issues/660)
-#	
+#
 #############################################
 # (map - debug, text symbols)
-# 
+#
 # []  --> TODO
 # [-] --> nothing to do here, come along...
 # [x] --> task completed.
 # [!] --> Review needed, 'check this.'
-# 
+#
 ######### OPTION permissions
 # El kernel tiene tres imortantes cualidades; es prioritario,
 # el código es reentrante y es político agnóstico. Junto a este
 # último rasgo, han sido desarrolladas una serie de funciones,
 # algo así como unas macro, que facilitan la comunicación entre
 # el kernel y las aplicaciones.
-# Cuando un controlador de dispositivo no encuentra la forma de 
+# Cuando un controlador de dispositivo no encuentra la forma de
 # trabajar con un archivo, debido a la falta o insuficiencia del
 # permiso adecuado, la función que llama a dicho recurso, podría
 # concluirse que no reune las CAPACIDADES adecuadas.
@@ -31,14 +31,14 @@
 # binario que supuestamente debe instalarse durante la fase de
 # instalación(make install) sobre el directorio /bin. No debería
 # ser /bin, sino /usr/bin, pero imaginemos que es lo mismo!.
-# 
+#
 # Éste problema específico con la unidad de servicio 'xxx.service'
-# era de esperar, puesto que la instalación se realiza desde un 
+# era de esperar, puesto que la instalación se realiza desde un
 # usuario no administrador. Una busqueda sobre el directorio BUILD
 # para comprobar que efectivamente la construcción extrae de forma
 # adecuada la unidad de servicio, demuestra que está presente y la
 # información es correcta.
-# 
+#
 # [] - What function is calling the daemon?
 # [] - What is the required permision?
 # [x] - show a function implementation of a capable function:
@@ -48,12 +48,12 @@
 #			 the various CAP_ symbols describing a user-space process
 #			 may have.
 # The error says this:
-# Failed to get unit file state for ckb-daemon.service: 
+# Failed to get unit file state for ckb-daemon.service:
 #		No such file or directory
 #############################################
 #		 OPTION pulseadio
 # =====================
-# The man page of the subsystem(pulseadio) : 
+# The man page of the subsystem(pulseadio) :
 # 		it is runing  as a background process (PA) -> pidof(pulseadio).
 # 		--start option will fire-up the deamon at boot.
 # I think the problem is that some required application complements
@@ -62,25 +62,27 @@
 # CMake Warning at src/animations/mviz/CMakeLists.txt:31 (message):
 #   Missing PulseAudio API.  Not building mviz.
 # =====================
-#	
+#
 #############################################
 #		 OPTION systemd.unit
 # =====================
 # At this point of the build, many dependencies aren't installed.
 # It's a cryptic message because it refers to a systemd unit file
 # not builded yet, and the error itself is confusing.
-# 
+#
+#############################################
+#		 OPTION .gitClone
 # =====================
 # Git executable not found.
-# 	Failed to get unit file state for ckb-daemon.service: 
+# 	Failed to get unit file state for ckb-daemon.service:
 # 		No such file or directory
-# 	Failed to get unit file state for ckb-next-daemon.service: 
+# 	Failed to get unit file state for ckb-next-daemon.service:
 # 		No such file or directory
 # =====================
-# 
-# [] Why is warning a git executable?
+
+# [] Why a git executable, looks like a warning ?
 # [] Document after the build completes, the state of this error:
-# 
+#
 #############################################
 #		 OPTION dependencies
 # =====================
@@ -99,13 +101,13 @@
 # =====================
 # 	DEBUG xcb-ewmh
 # =====================
-# 
+#
 # 		[x] -- xcb-ewmh.pc file dropped on place. Problem solved.
 # 				The error message build says:
-# 					src/gui/CMakeLists.txt:316 can't find the package 
+# 					src/gui/CMakeLists.txt:316 can't find the package
 # 					xcb-ewmh. This pkg takes another name in this distro:
 # 					xcb-util-wm.
-# 				The check is searching for: 
+# 				The check is searching for:
 # 					pkg_check_modules(XCB_EWMH xcb-ewmh)
 # 		[-] You can try to oring the real pkg name in your distro, or
 # 				 to try another way touching source:
@@ -130,7 +132,7 @@
 # =====================
 # Distro specific alternative:
 # XCB util-wm module provides the following libraries:
-# 
+#
 #   - ewmh: Both client and window-manager helpers for EWMH.
 #   - icccm: Both client and window-manager helpers for ICCCM.
 #
@@ -144,13 +146,13 @@
 # 		exec_prefix=${prefix}/lib64/xcb-ewmh
 # 		includedir=${prefix}/include
 # 		libdir=${exec_prefix}/lib64
-# 
+#
 # 		Name: xcb-ewmh
 # 		Description: Client and window-manager helpers for EWMH.
 # 		Version: 0.4.1
 # 		Requires.private: xcb >= 1.11
 # 		Cflags: -I${includedir}/xcb-ewmh
-# 		Libs: -L${libdir} -lxcb-ewmh 
+# 		Libs: -L${libdir} -lxcb-ewmh
 #############################################
 # =====================
 # 	debug dbusmenu-qt5
@@ -160,16 +162,16 @@
 # 				-- The same problem as above; it seems that the package
 # 				-- configuration(.pc) file is missing.
 # 				The package conig file(.pc) is available through
-# 				the development pkg. 
+# 				the development pkg.
 # 				It reflects another version:
 # 				0.9.3. and dbus.pc shows 0.9.2. Why?
 #
-#					rpm -q dbusmenu-qt5-devel; 
-#	        rpm -q dbusmenu-qt5; 
+#					rpm -q dbusmenu-qt5-devel;
+#	        rpm -q dbusmenu-qt5;
 #	        pkg-config --modversion dbusmenu-qt5;
-#	
+#
 #############################################
-#	
+#
 #	OPTION target
 #	================
 #	[x] Try to build without the offending file:
@@ -192,7 +194,7 @@
 #			 Nothing to do here. If OPTION target fails, it will be needed
 #			 [-] to tar another ball.
 #			 		 No need to build another tarball at this point.
-# 
+#
 #		There are three files down /src/daemon/{structures.h:5,
 #		includes.h:71, command.c:3} that points to keymap_mac.h.
 #		There are three files that points to keymap.h. At the same
@@ -200,14 +202,14 @@
 #		The packager decides to exclude all macintosh source from this
 #		pkg, due the developer decision to not continue the mac support
 #		to the driver.
-#		
+#
 #		[x] Update the source to avoid cross references to NOT INCLUDED
 #			 Macintosh source.
 #			[-] Source: src/daemon/structures.h has a reference to input_mac_vhid.h
 #				 You should to inhibit the header.
 #			[-] Source: src/daemon/includes.h. It refences to src/daemon/structures.h
 #			[-] Source: src/daemon/command.c
-#			[x] SUMMARY: 
+#			[x] SUMMARY:
 #					[x] commented the line 8: #include "input_mac_vhid.h" on
 #					   src/daemon/structures.h
 #					[x] commented the line 4: #include "keymap_mac.h" on
@@ -230,7 +232,7 @@
 #		[x] This is another type of error, and has nothing to do with errors of
 #			 target mac.
 #			 The new error: xcb/xcb_ewmh.h: No such file or directory.
-#			 Local includes, where the header file should be placed is missing		
+#			 Local includes, where the header file should be placed is missing
 #			 the header:/usr/include/xcb.
 #			[x] Check the pkg upstream: No devel pkg upstream.
 #			[x] Locate the exact header: xcb_ewmh.h
@@ -246,16 +248,16 @@
 #			    In other words is needed to modify the script to not install
 #			    nothing since this is the rpm task.
 #			    I understand the sense of writing the script in that way,
-#			    because without a ckb-next.rpm file, the user needs some 
+#			    because without a ckb-next.rpm file, the user needs some
 #			    way to make the application run.
 #			    It seems a stupid think to left the script to continue to
-#			    the end, but it is not, since this is the first build of 
+#			    the end, but it is not, since this is the first build of
 #			    the application and the environment was setup to test anything.
 #			    There are some task that clearly needs to be modified, and
 #			    a new todo list will be made to track those changes.
 #			    The next todo list starts from a point where the application
 #			    was builded and installed gracefully.
-#			    
+#
 #	TODO (building the rpm file):
 #	##############################################################
 #	## You are working on a development project. The upstream		##
@@ -263,10 +265,10 @@
 #	## 		WARNING  	WARNING  	WARNING  	WARNING  	WARNING  			##
 #	##						Think before, and do later										##
 #	##############################################################
-#	
+#
 #	[] Planing the build:
 #    Now that has been tested the script 'quickinstall', appears the option
-#    of continue to using it, or take proffit of commands defined 
+#    of continue to using it, or take proffit of commands defined
 #    and update the spec accordingly. This means write each command
 #    defined in 'quickinstall' script, and put it on their respective
 #    section in the spec. so:
@@ -298,14 +300,14 @@
 #				[x] %install
 #				[x] %clean
 #				[x] %files : this is done. ok.
-#				[x] %pre 
+#				[x] %pre
 #				[-] %post
 #				[x] %preun
 #				[-] %postun
 #		 [x] Dive in the rpm 'method', and grab the script information.
 #				The script rpm functionallity it's tied to a process that
-#				take an action when the installed package's spec change 
-#				their status. It is usefull when is needed to change a 
+#				take an action when the installed package's spec change
+#				their status. It is usefull when is needed to change a
 #				package installation based on other pkg. Triggers don not
 #				replace dependencies.
 #		 [x] Now you know the exact dependencies the application needs.
@@ -315,17 +317,17 @@
 #				- BuildRequires: as above, but involved in the build process.
 #				- Provides: the capabilities your pkg provides.
 #				- Conflicts: pkg conflicts with a capability provided by other.
-#				- Obsoletes: when the installation of a pkg providing a 
+#				- Obsoletes: when the installation of a pkg providing a
 #					capability, obsoletes similar capability provided by another
 #					package. Such situation occurs when a package is renamed.
-# 				
+#
 #	##############################################################
 #	## BUILD DEVELOPMENT:                                    		##
 #	##   - Second stage                               					##
 #	## 	 - Updated spec(whithout quickinstall scripts).    			##
 #	##						                          										##
 #	##############################################################
-# 		    
+#
 # [] Build with short circuit.
 # 	[x] pre stage: verified file permissions and owner. OK.
 # 								 The log of this stage is showing the user
@@ -333,40 +335,40 @@
 # 								 defined in the specs works as it should be.
 # 	[]  build stage:
 # 		 [x] Check dependencies:
-# 		 		      qt5-qtbase-devel 
-# 		 		      qt5-qtx11extras-devel 
-# 		 		      quazip-qt5 
-# 		 		      quazip-qt5-devel 
+# 		 		      qt5-qtbase-devel
+# 		 		      qt5-qtx11extras-devel
+# 		 		      quazip-qt5
+# 		 		      quazip-qt5-devel
 # 		 		      xcb-util-wm-devel
 #				[] build error:
-# 			>> cmake/modules/FindUDEV.cmake:82 
+# 			>> cmake/modules/FindUDEV.cmake:82
 # 			>>	(find_package_handle_standard_args)
 # 			>> src/daemon/CMakeLists.txt:56 (find_package)
 # 			>> Could NOT find UDEV (missing: UDEV_LIBRARY UDEV_INCLUDE_DIR)
 #   			This cryptic message, seems to be speaking about the library,
 # 				but it could not be that. Many applications depends on a
-# 				acceptable installation of UDEV, bla, bla, wide system resource. 
+# 				acceptable installation of UDEV, bla, bla, wide system resource.
 # 				The cryptic message also says ... missing: UDEV_INCLUDE_DIR,
 # 				and that variable is often defined on a .pc(package config)
-# 				file. 
+# 				file.
 # 				It's more weird than that, because the first time i builded and
 # 				installed the driver, the log out/error no mention that
-# 				error, at all. Cosmic Ray? 
+# 				error, at all. Cosmic Ray?
 # 				[x] Install development package. OR
 # 						[-] Write a xxx.pc. The lib is there.
 # 				[x] Update spec dependencies.
 # 						[x] Modified spec to add dependencie to libudev(xxx.pc).
 # 				[] And you should start thinking to write a readme style file,
 # 					 documenting all that, specially the dependencies to a xxx.pc.
-# 				[x] Review build targets on the spec. 				
-# 						[x] Modified spec to build a single target.  
-# 				[x] Push changes. 
+# 				[x] Review build targets on the spec.
+# 						[x] Modified spec to build a single target.
+# 				[x] Push changes.
 # 	REGRESION:
 # 			This regresion appears because you commented those lines
 # 			after packaging the source on the tarball. So every time
 # 			you runs a new build, the original code it's droped on place.
 # 			(False if you are using short-circuit mechanism).
-#			[x] SUMMARY: 
+#			[x] SUMMARY:
 #					[x] commented the line 8: #include "input_mac_vhid.h" on
 #					   src/daemon/structures.h
 #					[x] commented the line 4: #include "keymap_mac.h" on
@@ -375,37 +377,37 @@
 # 				Note: It was changed both files uncompressing first
 # 							and editing the files with vi editor. You must
 # 							'!' force the action because the files opens in
-# 							ro. It's not a glamorouse action, but if you are 
+# 							ro. It's not a glamorouse action, but if you are
 # 							working with few files, it is ok.
 # 				Note: (man rpmbuild):
-# 							"[-bc] Do the '%build' stage from spec file 
-# 							(after doing the %prep stage)... 
-# 							Here it's not doing that. It's re-using the 
+# 							"[-bc] Do the '%build' stage from spec file
+# 							(after doing the %prep stage)...
+# 							Here it's not doing that. It's re-using the
 # 							source skiping %prep stage, Why?
 # 							Option A: cosmic ray again.
 # 							Option B: i'm using --short-circuit. I think i'm
 # 							wrigth. So if the flag is turned off it should
 # 							begins the process again!
 # 				Observation: The %prep directive on the spec file leaks
-# 							the declaration 'rm -rf $RPM_BUILD_ROOT'. 
+# 							the declaration 'rm -rf $RPM_BUILD_ROOT'.
 # 							It has sense because once placed the extracted files
 # 							isn't needed to alter the source in any form.
 # 							And that fact, affects the 'short circuit' behaviour
 # 							if some file are modified in any way; the flag doesn't
 # 							recreate those files, that are placed staticaly.
-# 
+#
 # 	PATCHING:
-# 	 "Patches are important because they allow you to start 
+# 	 "Patches are important because they allow you to start
 # 		with pristine sources..."
-# 	 Any one that opens the x.rpm could see those changes 
+# 	 Any one that opens the x.rpm could see those changes
 # 	 over the patches, and decide if agree with that or not.
-# 	 
+#
 #	##############################################################
 #	## BUILD DEVELOPMENT:                                    		##
 #	##   - Patching with git                         						##
 #	##############################################################
 #	SUMARY:
-#		Using git pacthing means an exact copy of the modified files 
+#		Using git pacthing means an exact copy of the modified files
 # 	where they were. It's not enough to copy the files you want
 # 	to modify on any directory. This will not work.
 #		This comment reflects a similar sitaution on a foi dir, where
@@ -423,8 +425,8 @@
 #					path. It's just raw string, it should work.
 #	I don't have  special interest on cosmic ray, but...
 #		How can fail an instruction (get processors number) on a build
-#		and get a successfull work on previous ones? 
-#	
+#		and get a successfull work on previous ones?
+#
 #		1.- The short circuit mechanism it's skiping the processor test,
 #				on subsequent builds. This is a %pre script.
 #		2.  Cosmic ray.
@@ -432,18 +434,18 @@
 #				clearify the spec reads. It is avoided to poping an
 #				innecessary shell; instead, it's calling just the app;
 #				the available processor number test.
-#	
-#	
-#	
-#	
-#	
+#
+#
+#
+#
+#
 #	##############################################################
 #		SYSTEM ALERT:
 #			timeStamp: Mon Sep  9 21:02:47 -0400 2024
 #			That mark clearly indicate a wrong date set-up. It's a trivial
 #			info because the underliying system porpouse it's dedicated to
 #			test a build. It has no other porpouse. But the lastlog log
-#			it's displaying a login from the router IP/gateway. 
+#			it's displaying a login from the router IP/gateway.
 #			A possible explanation:
 #				A latency between the dhcp server(DNSMASK) in this case,
 #				and the vm server.
@@ -454,11 +456,11 @@
 #				It is just showing the failed login. File log: log-ausearch.log
 #			lastb:
 #				It's not clear why the login has failed, it shows a symbol
-#				on the login attempt, and could be meaning a misstyped 
+#				on the login attempt, and could be meaning a misstyped
 #				'try' to connect: "(unknown ttyS0" . File: badLogs.log
 #			last: same.
-#	
-#	
+#
+#
 #	##############################################################
 #	## BUILD DEVELOPMENT:                                    		##
 #	##   - Last stage                               						##
@@ -466,5 +468,5 @@
 #	##		 as git-packaging.				                          	##									##
 #	##############################################################
 #	C.I. Continuous integration. Git have an engine to automate
-#	build testing. You are not working on the source. Remove 
+#	build testing. You are not working on the source. Remove
 #	references to it.
