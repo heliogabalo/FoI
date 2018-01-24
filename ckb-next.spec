@@ -61,7 +61,7 @@ Version: %{version}
 # Build locations  #######################
 ##########################################
 # The build directory is the location where RPM actually builds.
-# Automatic processing by RPM system, ocurs when changes to a 
+# Automatic processing by RPM system, ocurs when it changes to the 
 # directory as part of the whole process.
 # 
 # The buildroot directory, acts as staging area and it looks like
@@ -106,13 +106,13 @@ git am %{_sourcedir}/ckb-0.6.0-3.patch
 ### Pre. It runs scripts prior to installation. 
 ###
 
-%pre -p %{_sourcedir}/Source1
+%pre -p %{_sourcedir}/%{Source1}
 
 ###
 ### Build section
 ###
 
-%build -p %{_sourcedir}/Source1
+%build -p %{_sourcedir}/%{Source1}
 rm -rf $RPM_BUILD_ROOT
 cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release -DSAFE_INSTALL=ON -DSAFE_UNINSTALL=ON
 cmake --build build --target all -- -j "$JOBS"
