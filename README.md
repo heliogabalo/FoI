@@ -20,7 +20,7 @@
 ## File of Interest
 
 A bunch of files, that for some reason, they have
-some interest to remark by itself.
+any interest to remark by itself.
 
 Examples:
 
@@ -54,6 +54,41 @@ you saved the file with git.
 		unlink my_file
 
 ### Config files
+To start working with all this mesh, open your `~/.bashrc` and add
+as easy alias `alias foiln='echo "ln -P --backup=numbered /path/to/file ."'`
+It just remember the link command, when starting to pull files to the
+repository. Reload bash with `source ~/.bashrc`, and you are done.
+
+Conventionally, a repo is a directory down the user space;
+		/home/user/myRepos/FoI/
+
+If it is not done before, make a directroy under the `myRepos`
+directory, and stablish the FoI dir.
+1. `mkdir -p myRepos/FoI`.
+2. `cd myRepos/FoI`.
+3. `git init`.
+4. Drop inside your static files; readme, license, whatever.
+5. Use the dradis: 
+		git status; git add FoI-file; git commit -m 'initial commit, Repo FoI.'
+6. Now link the foi file. `ln -P --backup=numbered /path/to/file .`
+7. In this case, i omited all that staff of my README because it's
+specific of the repo FoI. I will start pounding on a original file
+with a spec of a driver; yours could be anything. I don't have any
+other place where this document is binded.
+
+Next step; to stablish a quick copy of the File of Interest, so you
+can count with a rapid backup of the file at the state you 'imorted'
+or hard linked the file. This is just to be save, it's not imperative
+this step because the best scenario is to commit the file just once
+hard linked. Any way; to do this: `cat foi-file > foi-file.bak`.
+Remember, once unlinked the foi file, it'll be erased.
+
+When the directory is just started, or few populated, it doesn't have
+too many sense to make directories inside; the situation change with
+the neighbourhood at the door. Just make a directory with descriptive
+name; example: `myWonderfullApp/foi.files`.
+
+
 ### Spec files
 ### Bitacora files
 ### LICENSE files
