@@ -11,4 +11,6 @@ bitacora file, whose mision is to log the commands or scripts
 done while a work session.
 
 All these files are a physical link of the original file and,
-a control version file, with their apropiate log and history. 
+a control version file, with their apropiate log and history.
+
+
