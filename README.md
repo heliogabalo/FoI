@@ -77,7 +77,7 @@ with a spec of a driver; yours could be anything. I don't have any
 other place where this document is binded.
 
 Next step; to stablish a quick copy of the File of Interest, so you
-can count with a rapid backup of the file at the state you 'imorted'
+can count with a rapid backup of the file at the state you 'imported'
 or hard linked the file. This is just to be save, it's not imperative
 this step because the best scenario is to commit the file just once
 hard linked. Any way; to do this: `cat foi-file > foi-file.bak`.
@@ -88,8 +88,73 @@ too many sense to make directories inside; the situation change with
 the neighbourhood at the door. Just make a directory with descriptive
 name; example: `myWonderfullApp/foi.files`.
 
+Another usefull technique, consist in printing _a value of a symbolic_
+_link or canonical file name._
+
+__absolute path:__
+		readlink -f foi.file 
+
+__find all links of specific inode__
+		stat foi.file
+		find ~/ -inum inode_num
+
 
 ### Spec files
+
+Specification files -or specs for short; are another example of those
+files that not belonging to any particular project by itself, it's
+binded to a development process.
+
+This is slightly different of other wide used files, because relates
+to specific projects, but is not part of the source that the developer
+coded, to make 'usefull' their application.
+
+I think a example session should be clear enough:
+1. Pull the file to your foi repositorie.
+2. Make changes on file, and save with your editor.
+3. The changes made over the file could be a few ones, or numerous
+changes. In this step, we'll prepare to planning what we'll do in the
+source and how we'll document the work done.
+
+I have some changes in my spec file, as: required dependencies, 
+exclusive architecture decissions, and a few others.
+Once the work is done, it appears the need to document all the task
+done on the source -file spec. The problem in this repositorie it's
+that it will sostain a bunch of unordered files, that could or could
+not relate betwen them. So the question is; what kind of logs i want
+to state in the history of this repo?
+
+In my opinion, all anotations should be integrated on the git log
+as a block. A general propouse log that describes all changes done
+_in a row._
+This avoids to duplicate the log, here; in the File of Interest repo,
+and in the actual repo that reflects the development of the application.
+In this way, it's possible to use this repo as an index of changes
+done over specific files; the idea is to _cat_ the git log _grepping_
+for a file.
+
+		prompt:> git log --oneline |grep ckb-next.spec
+		f4721f6 ckb-next.spec file, added to DVCS.
+
+That was the the recovered log, once added to the repo.
+
+		prompt:> git log --oneline |grep ckb-next.spec
+		a9d509e ckb-next.spec. BuildRequires, pre, quickinstall erased.
+		f4721f6 ckb-next.spec file, added to DVCS.
+
+This time, i added a summary line, that reflects changes done
+over the file. It doesn't matter if it is deleted the file;
+because those changes are part of the git log history, and it's
+posssible to retrive that data in a single log.
+
+The oposite situation appears on the actual repo of the project,
+where a more grained description of each change should be done.
+In this case the spec file -as i said before, is not part of the
+source, but if i need to do so, now i have a _guide_ where to start
+documenting each chunk of data change; `git add -i` on the development
+repo of the application, will be suffice to _patch_ each minimal change.
+
+
 ### Bitacora files
 ### LICENSE files
 ### README files
