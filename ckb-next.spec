@@ -23,6 +23,11 @@ Distribution: %{distribution}
 
 Name: ckb-next
 
+# Required dependecies on the build step.
+BuildRequires: qt5 qt5-qtbase-gui qt5-qtbase qt5-qtbase-devel \
+	quazip-qt5 quazip-qt5-devel dbusmenu-qt5 dbusmenu-qt5-devel \
+	qt5-qtx11extras-devel xcb-util-wm-devel xcb-util-wm
+
 #Prefix: $RPM_BUILD_ROOT
 Provides: %{name}
 
@@ -33,7 +38,9 @@ Release: 1
 
 Source0: %{name}.tar.gz
 
-Excludeos: arm
+Exclusivearch: x86_64
+
+Exclusiveos: linux
 
 ## The vendor directive names the company or organization
 ## behind an RPM package.
@@ -81,19 +88,37 @@ Buildroot: %{name}-%{version}
 %prep
 %setup -n %{name}
 
+
+###
+### Pre. It runs scripts prior to installation. 
+###
+
+%pre
+# Find out how many cores the system has, for make
+if [[ -z "$JOBS" ]]; then
+	JOBS=$(getconf _NPROCESSORS_ONLN 2>/dev/null)
+fi
+
+# Default to 2 jobs if something went wrong earlier
+if [[ -z "$JOBS" ]]; then
+    JOBS=2
+fi
+
 ###
 ### Build section
 ###
 
 %build
-./quickinstall
-
+rm -rf $RPM_BUILD_ROOT
+cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release -DSAFE_INSTALL=ON -DSAFE_UNINSTALL=ON
+cmake --build build --target all -- -j "$JOBS"
 ###
 ### Install section
 ###
 
 %install
 rm -fr $RPM_BUILD_ROOT
+sudo cmake --build build --target install
 
 ###
 ### Clean section
