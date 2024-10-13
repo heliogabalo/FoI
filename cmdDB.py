@@ -34,3 +34,6 @@ cmd4 = "ssh cloud-user@192.168.122.105 \
 	
 cmd_proto = (cmd_connect, cmd_string)
 
+cmd_string = 
+["'ls ~/Documents/Logs/pkg-inst/'", 
+ "list of remote commands"]
