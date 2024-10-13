@@ -31,3 +31,6 @@ cmd4 = "ssh cloud-user@192.168.122.105 \
 	--target=`uname -m` ckb-next.spec \
 	2> ~/Documents/Logs/ckb-prepare-err.log \
 	|tee ~/Documents/Logs/ckb-prepare-out.log';"
+	
+cmd_proto = (cmd_connect, cmd_string)
+
