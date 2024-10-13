@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-cmd_ssh = (command, user, '@', address)
-
 cmd_remote = ""
 
 user = {root: [cmd1, cmd2, cmd3],
