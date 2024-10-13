@@ -12,7 +12,14 @@ class MyClass:
 	
 	def getUser():
 		pass
-		
+	
+	def constructor_cmd():
+		pass
+		cmd = (command, user, '@', address)
+		cmd_connect = (command + ' ' + user + '@' + address)
+		cmdDB.cmd_remote = cmdDB.cmd_string[n]
+		remote_cmd = cmdDB.cmd_remote
+		 
 	def cmd_type_list():
 		pass
 	
