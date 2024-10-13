@@ -6,6 +6,13 @@ user = {root: [cmdR1, cmdR2, cmdR3, cmdR_list_rpms],
 				cloud_user: [cmd1, cmd2, cmd3, cmd_list_rpms]}
 
 
+
+cmdR_list_rpms = "ssh root@192.168.122.105 \
+	'ls -l ~/rpmbuild/RPMS/'"
+
+cmd_list_rpms = "ssh cloud-user@192.168.122.105 \
+	'ls -l ~/rpmbuild/RPMS/'"
+	
 # regular user -- system policy
 cmd1 = "ssh cloud-user@192.168.122.105 \
 	'rpm -q pkgconfig \
