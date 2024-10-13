@@ -5,8 +5,6 @@ cmd_remote = ""
 user = {root: [cmdR1, cmdR2, cmdR3, cmdR_list_rpms],
 				cloud_user: [cmd1, cmd2, cmd3, cmd_list_rpms]}
 
-remote = "ssh cloud-user@192.168.122.105 \
-	'ls -l ~/rpmbuild/RPMS/dbusmenu-qt5-*'"
 
 # regular user -- system policy
 cmd1 = "ssh cloud-user@192.168.122.105 \
