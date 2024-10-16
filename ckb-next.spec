@@ -112,7 +112,7 @@ fi
 %build
 rm -rf $RPM_BUILD_ROOT
 cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release -DSAFE_INSTALL=ON -DSAFE_UNINSTALL=ON
-cmake --build build --target all -- -j "$JOBS"
+cmake --build build --target linux -- -j "$JOBS"
 ###
 ### Install section
 ###
