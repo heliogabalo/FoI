@@ -110,7 +110,7 @@ to specific projects, but is not part of the source that the developer
 coded, to make 'usefull' their application.
 
 I think a example session should be clear enough:
-1. Pull the file to your foi repositorie.
+1. Pull the file to your foi repository .
 2. Make changes on file, and save with your editor.
 3. The changes made over the file could be a few ones, or numerous
 changes. In this step, we'll prepare to planning what we'll do in the
@@ -119,7 +119,7 @@ source and how we'll document the work done.
 I have some changes in my spec file, as: required dependencies, 
 exclusive architecture decissions, and a few others.
 Once the work is done, it appears the need to document all the task
-done on the source -file spec. The problem in this repositorie it's
+done on the source -file spec. The problem in this repository  it's
 that it will sostain a bunch of unordered files, that could or could
 not relate betwen them. So the question is; what kind of logs i want
 to state in the history of this repo?
@@ -149,11 +149,84 @@ posssible to retrive that data in a single log.
 
 The oposite situation appears on the actual repo of the project,
 where a more grained description of each change should be done.
-In this case the spec file -as i said before, is not part of the
-source, but if i need to do so, now i have a _guide_ where to start
+In this case the spec file -as mentioned before, is not part of the
+source, but if needed to do so, now there are a _guide_ where to start
 documenting each chunk of data change; `git add -i` on the development
 repo of the application, will be suffice to _patch_ each minimal change.
 
+__Patching__
+
+"Patches are important because they allow you to start 
+with pristine sources..."
+	> extract from 'RPM 4 RPM guide'.
+	
+The first thing to do is to fetch the file on the FoI repo,
+now start coding and making changes. 
+
+		ln -P --backup=numbered /path/to/file .
+
+Example scripting:
+prompt:> cp original.h modified.h
+prompt:> diff -u original.h modified.h > modified.patch
+prompt:> patch patched.h modified.patch
+
+File extension `.patch` is omited inside a `.gitigone` file, so could
+be ereased or moved to modified.v1.0.0-1 on a repository.
+Version is the relevant word, where the actual number represents a
+change on the repository.
+
+
+
+__Warning:__ with file backups, this technique of hard-linking files
+is a process silently dangerous, you should not link any file.bak
+or the state of the file will change without notice. 
+
+__Cherry picking__
+This command `git cherry-pick` is used to apply the changes done in
+one commit on a given repository, to a clean (no modifications from
+the HEAD commit) working tree. This is particularly interesting to a
+FoI repo, where you can commit miskates, or unwanted changes, and 
+re-commit your work without disturbing shared work.
+
+		prompt:> git status 
+		# On branch master
+		# Changes to be committed:
+		#   (use "git reset HEAD <file>..." to unstage)
+		#
+		#	new file:   keymap.h
+		#	new file:   structures.h
+		#
+		# Changes not staged for commit:
+		#   (use "git add <file>..." to update what will be committed)
+		#   (use "git checkout -- <file>..." to discard changes in working directory)
+		#
+		#	modified:   README.md
+		#
+
+Option `-x` appends a line indicating the original commit that points to.
+`git help cherry-pick`: 
+	'Do not use this option if you are cherry-picking from your private
+branch' -FoI in this case. Well, this is a special 'branch',
+i'ts a repository that sources files from any given repository,
+but it is not a canonical branch of any, it is a File of Interest: a bunch
+of files, that for some reason, they have any interest to remark by itself.
+
+Repos like this, can be used as index. It's not a repo that anyone will
+erease; a branch in a delovopement scenario could continue or not.
+This repository is a kind of place where the owner can drop files of
+interest. 
+
+It's sostainable without any file; the logs are always there. Git knowledge
+spokes about this as "git history". Wonderfull, 
+
+This convention conflicts with lines above, a banned degree and others
+trains of, can appear from a user perspective. Several ways to avoid
+this conflicts are known on replicating commands as `rpm -q pkg`; a
+trivial example to query in some way, _what_ and _what not,_ can be do it.
+
+
+
+__Note:__ Plese, don't call FoI anything; it's extrange as green dog.
 
 ### Bitacora files
 ### LICENSE files
