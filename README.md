@@ -99,6 +99,11 @@ __find all links of specific inode__
 		find ~/ -inum inode_num
 
 
+__Files with the same name__
+
+
+
+
 ### Spec files
 
 Specification files -or specs for short; are another example of those
@@ -117,7 +122,7 @@ changes. In this step, we'll prepare to planning what we'll do in the
 source and how we'll document the work done.
 
 I have some changes in my spec file, as: required dependencies, 
-exclusive architecture decissions, and a few others.
+exclusive platform decissions, and a few others.
 Once the work is done, it appears the need to document all the task
 done on the source -file spec. The problem in this repository  it's
 that it will sostain a bunch of unordered files, that could or could
@@ -154,7 +159,8 @@ source, but if needed to do so, now there are a _guide_ where to start
 documenting each chunk of data change; `git add -i` on the development
 repo of the application, will be suffice to _patch_ each minimal change.
 
-__Patching__
+
+__Patching with bash__
 
 "Patches are important because they allow you to start 
 with pristine sources..."
@@ -175,17 +181,52 @@ be ereased or moved to modified.v1.0.0-1 on a repository.
 Version is the relevant word, where the actual number represents a
 change on the repository.
 
-
-
 __Warning:__ with file backups, this technique of hard-linking files
 is a process silently dangerous, you should not link any file.bak
-or the state of the file will change without notice. 
+or the state of the file will change without notice.
+
+__Parches__
+El concepto de parche en git, en mi opinión, resulta algo contradictorio
+a lo que se entiende por hacer un parche, a uno o mas archivos, no
+asociados a un repositorio. Pienso que rara vez resulta conveniente 
+mezclar las técnica utilizadas. 
+¿Para qué resulta útil un parche en git? Todos los commits en git, son
+parches. Modificaciones que se han ido realizando a lo largo del 
+desarrollo de uno o más archivos de fuente.
+La excepción sería en un contexto donde no hay conexión al servidor git;
+tal y como explican los distintos manuales(bundle, format-patch ...)
+Es posible que por esta razón no haya sido implementado un mecanismo
+equivalente en git(comando `diff/patch`). 
+Los dos comandos antes mencionados; bundle y format-patch, son preparados
+git, que aplican un formato específico para enviar vía correo electrónico
+el commit elegido. Ninguno de ellos resulta en un archivo propiamente
+de parche; una vez generado el archivo de cambio, debe recuperarse
+con una herramienta específica de git. En este caso `git am`.
+
+Por eso lo de no mezclar: 
+		diff -u keymap.h patched-kmap.h > keymap.h.patch
+
+		
+__Patching with git__
+
+		#### git-format git bundle
+		## From HEAD count numbered of indexed commits
+		git format-patch -k --stdout HEAD -1
+		## From hash count numbered of indexed commits
+		git format-patch -k --stdout hash -1 > file-git.patch
+		## From hash to hash print those commits
+		git format-patch -k --stdout hash..hash
+
+
+		git mailinfo msg patch < mail >info
+		git mailinfo msg patch-git.spec < git.patch
 
 __Cherry picking__
+
 This command `git cherry-pick` is used to apply the changes done in
-one commit on a given repository, to a clean (no modifications from
-the HEAD commit) working tree. This is particularly interesting to a
-FoI repo, where you can commit miskates, or unwanted changes, and 
+one  commit on a given  repository, to  a clean  working tree (no
+modifications from the HEAD commit). This is particularly interesting
+to a FoI repo, where you can commit miskates, or unwanted changes, and 
 re-commit your work without disturbing shared work.
 
 		prompt:> git status 
@@ -223,8 +264,6 @@ This convention conflicts with lines above, a banned degree and others
 trains of, can appear from a user perspective. Several ways to avoid
 this conflicts are known on replicating commands as `rpm -q pkg`; a
 trivial example to query in some way, _what_ and _what not,_ can be do it.
-
-
 
 __Note:__ Plese, don't call FoI anything; it's extrange as green dog.
 
