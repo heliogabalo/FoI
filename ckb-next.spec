@@ -37,7 +37,8 @@ Provides: %{name}
 # file and recreate the package.
 Release: 1
 
-Source0: %{name}.tar.gz
+Source1: %{name}.tar.gz
+Source2: ckb-0.6.0-1.patch
 
 ExclusiveArch: x86_64
 
@@ -88,7 +89,14 @@ Buildroot: %{name}-%{version}
 
 %prep
 %setup -n %{name}
-
+# Create a git repo within the expanded tarball.
+git init
+git config user.email "r4u1974@gmail.com"
+git config user.name "Raul Vilchez"
+git add .
+git commit -a -q -m "ckb-next-%{version} baseline."
+# Apply all the patches on top.
+git am %{patches}
 
 ###
 ### Pre. It runs scripts prior to installation. 
@@ -140,18 +148,3 @@ rm -fr $RPM_BUILD_ROOT
 %doc README.md LICENSE CHANGELOG.md
 
 defattr(-, $USERNAME, $USERNAME)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
