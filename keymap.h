@@ -1,7 +1,7 @@
 #ifndef KEYMAP_H
 #define KEYMAP_H
 
-#include "keymap_mac.h"
+//#include "keymap_mac.h"
 
 // Reserved keys (no input)
 #define KEY_NONE    -1

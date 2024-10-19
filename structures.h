@@ -5,7 +5,7 @@
 #include "keymap.h"
 #include "command.h"
 #ifdef OS_MAC
-#include "input_mac_vhid.h" // For the VirtualHIDDevice structs
+//#include "input_mac_vhid.h" // For the VirtualHIDDevice structs
 #endif
 
 // Profile ID structure
