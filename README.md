@@ -160,6 +160,54 @@ documenting each chunk of data change; `git add -i` on the development
 repo of the application, will be suffice to _patch_ each minimal change.
 
 
+__Parches__
+El concepto de parche en git, en mi opinión; resulta algo confuso
+respecto a cómo efectuar un parche, mediante el método convencional.
+Pienso que rara vez resulta conveniente mezclar las técnica utilizadas. 
+
+¿Para qué resulta útil un parche en git? Todos los commits en git, son
+parches. Modificaciones que se han ido realizando a lo largo del 
+desarrollo de uno o más archivos de fuente.
+
+Por diversos motivos, podría aparecer la necesidad de trasladar o
+empaquetar una validación(commit), para que otro desarrollador, tenga
+la oportunidad de incorporar el cambio, a su fuente local.
+
+En este contexto, extraer el contenido de dicha validación, pasa por
+aplicar a los datos un formato específico, para que de alguna manera,
+pueda ser trasladado; vía mail, via medio de almacenamiento.
+Es posible que por esta razón haya sido implementado un mecanismo
+equivalente en git(comando `diff/patch`). 
+
+
+La excepción sería en un contexto donde no
+hay conexión al servidor git; tal y como explican los distintos
+manuales(bundle, format-patch ...).
+
+
+Los dos comandos antes mencionados; bundle y format-patch, son preparados
+git, que aplican un formato específico para enviar vía correo electrónico
+el commit elegido. Ninguno de ellos resulta en un archivo propiamente
+de parche; una vez generado el archivo de cambio, debe recuperarse
+con una herramienta específica de git. En este caso `git am`.
+
+Por eso lo de no mezclar: 
+		scripting-prompt:> diff -u keymap.h patched-kmap.h > keymap.h.patch
+con:
+		git-prompt:>git format-patch -k --stdout HEAD -1
+
+Este script es el código que se utilizaría en la .spec, para aplicar
+los cambios de un parche:`Scripts/apply-patch.sh`.
+		
+		
+Es posible utilizar ambos mecanismos en un único archivo de 
+especificación, pero no mezclar los comandos. Cuando se trabaja en
+una fuente con git, lo más razonable, es seguir utilizando esta 
+herramienta, para producir y aplicar los parches. Si por el contrario,
+el archivo proviene de una fuente externa a git; resutará conveniente
+utilizar las técnicas de parcheado habitual.
+
+
 __Patching with bash__
 
 "Patches are important because they allow you to start 
@@ -181,35 +229,10 @@ be ereased or moved to modified.v1.0.0-1 on a repository.
 Version is the relevant word, where the actual number represents a
 change on the repository.
 
-__Warning:__ with file backups, this technique of hard-linking files
-is a process silently dangerous, you should not link any file.bak
-or the state of the file will change without notice.
 
-__Parches__
-El concepto de parche en git, en mi opinión, resulta algo contradictorio
-a lo que se entiende por hacer un parche, a uno o mas archivos, no
-asociados a un repositorio. Pienso que rara vez resulta conveniente 
-mezclar las técnica utilizadas. 
-¿Para qué resulta útil un parche en git? Todos los commits en git, son
-parches. Modificaciones que se han ido realizando a lo largo del 
-desarrollo de uno o más archivos de fuente.
-La excepción sería en un contexto donde no hay conexión al servidor git;
-tal y como explican los distintos manuales(bundle, format-patch ...)
-Es posible que por esta razón no haya sido implementado un mecanismo
-equivalente en git(comando `diff/patch`). 
-Los dos comandos antes mencionados; bundle y format-patch, son preparados
-git, que aplican un formato específico para enviar vía correo electrónico
-el commit elegido. Ninguno de ellos resulta en un archivo propiamente
-de parche; una vez generado el archivo de cambio, debe recuperarse
-con una herramienta específica de git. En este caso `git am`.
-
-Por eso lo de no mezclar: 
-		diff -u keymap.h patched-kmap.h > keymap.h.patch
-
-		
 __Patching with git__
 
-		#### git-format git bundle
+		#### format-patch, mailinfo, am, bundle, cherry-picking
 		## From HEAD count numbered of indexed commits
 		git format-patch -k --stdout HEAD -1
 		## From hash count numbered of indexed commits
@@ -220,6 +243,28 @@ __Patching with git__
 
 		git mailinfo msg patch < mail >info
 		git mailinfo msg patch-git.spec < git.patch
+
+
+
+This is a trick to use git patching engine, instead the usual scripting
+with `patch`.
+
+		%prep
+		%setup -q
+		# Create a git repo within the expanded tarball.
+		git init
+		git config user.email ""
+		git config user.name ""
+		git add .
+		git commit -a -q -m "%{version} baseline."
+		# Apply all the patches on top.
+		git am %{patches}
+
+The former directive inside a rpm specification file, is `PatchN:` 
+where `N` is a number; consecutive or not.
+With this trick it's used the rpm placeholder, but not the directive
+since `git am` expects a list of files, with specific git patching 
+format, as builded by the `git format-patch`.
 
 __Cherry picking__
 
@@ -264,8 +309,12 @@ This convention conflicts with lines above, a banned degree and others
 trains of, can appear from a user perspective. Several ways to avoid
 this conflicts are known on replicating commands as `rpm -q pkg`; a
 trivial example to query in some way, _what_ and _what not,_ can be do it.
+	>__Note:__ Plese, don't call FoI anything; it's extrange as green dog.
 
-__Note:__ Plese, don't call FoI anything; it's extrange as green dog.
+__Warning:__ with file backups, this technique of hard-linking files
+is a process silently dangerous, you should not link any file.bak
+or the state of the file will change without notice.
+
 
 ### Bitacora files
 ### LICENSE files
