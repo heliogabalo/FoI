@@ -96,7 +96,7 @@ git config user.name "Raul Vilchez"
 git add .
 git commit -a -q -m "ckb-next-%{version} baseline."
 # Apply all the patches on top.
-git am %{patches}
+git am %{Source2}
 
 ###
 ### Pre. It runs scripts prior to installation. 
