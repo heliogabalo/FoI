@@ -28,6 +28,7 @@ BuildRequires: qt5 qt5-qtbase-gui qt5-qtbase qt5-qtbase-devel
 BuildRequires: quazip-qt5-devel dbusmenu-qt5 dbusmenu-qt5-devel
 BuildRequires: quazip-qt5 xcb-util-wm-devel xcb-util-wm
 BuildRequires: cmake pkgconfig qt5-qtx11extras-devel systemd-devel
+BuildRequires: systemd-rpm-macros
 
 #Prefix: $RPM_BUILD_ROOT
 Provides: %{name}
