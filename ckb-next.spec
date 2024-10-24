@@ -37,8 +37,7 @@ Provides: %{name}
 # file and recreate the package.
 Release: 1
 
-Source1: %{name}.tar.gz
-Source2: ckb-0.6.0-1.patch
+Source0: %{name}.tar.gz
 
 ExclusiveArch: x86_64
 
@@ -96,7 +95,9 @@ git config user.name "Raul Vilchez"
 git add .
 git commit -a -q -m "ckb-next-%{version} baseline."
 # Apply all the patches on top.
-git am %{Source2}
+git am %{_sourcedir}/ckb-0.6.0-1.patch
+git am %{_sourcedir}/ckb-0.6.0-2.patch
+git am %{_sourcedir}/ckb-0.6.0-3.patch
 
 ###
 ### Pre. It runs scripts prior to installation. 
@@ -120,7 +121,7 @@ fi
 %build
 rm -rf $RPM_BUILD_ROOT
 cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release -DSAFE_INSTALL=ON -DSAFE_UNINSTALL=ON
-cmake --build build --target linux -- -j "$JOBS"
+cmake --build build --target all -- -j "$JOBS"
 ###
 ### Install section
 ###
