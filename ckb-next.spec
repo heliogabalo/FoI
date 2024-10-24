@@ -39,6 +39,7 @@ Provides: %{name}
 Release: 1
 
 Source0: %{name}.tar.gz
+Source1: procDefNum.sh
 
 ExclusiveArch: x86_64
 
@@ -104,22 +105,13 @@ git am %{_sourcedir}/ckb-0.6.0-3.patch
 ### Pre. It runs scripts prior to installation. 
 ###
 
-%pre
-# Find out how many cores the system has, for make
-if [[ -z "$JOBS" ]]; then
-	JOBS=$(getconf _NPROCESSORS_ONLN 2>/dev/null)
-fi
-
-# Default to 2 jobs if something went wrong earlier
-if [[ -z "$JOBS" ]]; then
-    JOBS=2
-fi
+%pre -p %{_sourcedir}/Source1
 
 ###
 ### Build section
 ###
 
-%build
+%build -p %{_sourcedir}/Source1
 rm -rf $RPM_BUILD_ROOT
 cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release -DSAFE_INSTALL=ON -DSAFE_UNINSTALL=ON
 cmake --build build --target all -- -j "$JOBS"
