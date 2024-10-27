@@ -17,16 +17,30 @@
  * You should have received a copy of the GNU General Public License
  * along with FoI. If not, see <http://www.gnu.org/licenses/>.
  */-->
-## File of Interest
+ 
+## Table of contents
+
+1. File of Interest
+	1.99 Default branches.
+	1.98 Git stash.
+2. Config files
+3. Spec files
+4. Bitacora files
+5. LICENSE files
+6. README files
+7. Git ignores
+ 
+ 
+## 1. File of Interest
 
 A bunch of files, that for some reason, they have
 any interest to remark by itself.
 
 Examples:
 
-A README file that could be droped on diferent repositories, all
+A README file that could be dropped on different repositories, all
 of those belonging to different projects. A LICENSE file, a 
-bitacora file, whose mision is to log the commands or scripts
+bitacora file, whose mission is to log the commands or scripts
 done while a work session.
 
 All these files are a physical link of the original file and,
@@ -43,17 +57,57 @@ with the power of git. I'll put an example session:
 3. Write/modify the file.
 
 4. When done with the file, take a look at git dradis, and 
-update acordingly.
+update accordingly.
 
 5. To stop pounding on the original file, just unlink it. After
 this, the file will be ERASED from this repository, but, you can
 count with git power if did it well. Dive with `git log -p hash`
-to find in the history, data contined in the file, the last time
+to find in the history, data contained in the file, the last time
 you saved the file with git.
 
 		unlink my_file
 
-### Config files
+
+## 1.99 Default branches
+
+There are four _main_ branches on long-running projects; __master__,
+__next__, __seen__, __maint__. The structure of the project, reflects
+a complicated scenario, where a high number of developers and other
+people, contribute to code development.
+
+This is never the case of this repository; although the functionality
+shown in a big project, could be applied here. The next movement 
+should be to planning the names of the branches, and what propose
+they will have.
+
+Each topic branch, would may have a descriptive name, that speak
+about the application, instead. In this way, the branch will take
+the name of the project the developer is working on, and it avoids
+to use regular names, as devel or develop branch, that have few
+meaning here, since the repo by their own, is a development environment.
+
+With that approach, there is no need to make a _new dir_ when adding
+new files, that it doesn't belong to the same project. Simply checkout
+to the specific branch, without bothering with unrelated files 
+surfing in the working tree.
+
+What will be the state of the branch, initially added?
+
+
+
+## 1.98 Git stash
+
+"It takes the dirty state of your working directory, and saves it on
+a stack of unfinished changes, that can reapply at any time -even on a
+different branch".
+
+- modified tracked files.
+- staged changes.
+
+
+
+
+### 2. Config files
 To start working with all this mesh, open your `~/.bashrc` and add
 as easy alias `alias foiln='echo "ln -P --backup=numbered /path/to/file ."'`
 It just remember the link command, when starting to pull files to the
@@ -62,8 +116,8 @@ repository. Reload bash with `source ~/.bashrc`, and you are done.
 Conventionally, a repo is a directory down the user space;
 		/home/user/myRepos/FoI/
 
-If it is not done before, make a directroy under the `myRepos`
-directory, and stablish the FoI dir.
+If it is not done before, make a directory under the `myRepos`
+directory, and establish the FoI dir.
 1. `mkdir -p myRepos/FoI`.
 2. `cd myRepos/FoI`.
 3. `git init`.
@@ -71,12 +125,12 @@ directory, and stablish the FoI dir.
 5. Use the dradis: 
 		git status; git add FoI-file; git commit -m 'initial commit, Repo FoI.'
 6. Now link the foi file. `ln -P --backup=numbered /path/to/file .`
-7. In this case, i omited all that staff of my README because it's
+7. In this case, i omitted all that staff of my README because it's
 specific of the repo FoI. I will start pounding on a original file
 with a spec of a driver; yours could be anything. I don't have any
-other place where this document is binded.
+other place where this document is bonded.
 
-Next step; to stablish a quick copy of the File of Interest, so you
+Next step; to establish a quick copy of the File of Interest, so you
 can count with a rapid backup of the file at the state you 'imported'
 or hard linked the file. This is just to be save, it's not imperative
 this step because the best scenario is to commit the file just once
@@ -85,10 +139,10 @@ Remember, once unlinked the foi file, it'll be erased.
 
 When the directory is just started, or few populated, it doesn't have
 too many sense to make directories inside; the situation change with
-the neighbourhood at the door. Just make a directory with descriptive
+the neighborhood at the door. Just make a directory with descriptive
 name; example: `myWonderfullApp/foi.files`.
 
-Another usefull technique, consist in printing _a value of a symbolic_
+Another useful technique, consist in printing _a value of a symbolic_
 _link or canonical file name._
 
 __absolute path:__
@@ -104,15 +158,15 @@ __Files with the same name__
 
 
 
-### Spec files
+### 3. Spec files
 
 Specification files -or specs for short; are another example of those
 files that not belonging to any particular project by itself, it's
-binded to a development process.
+bonded to a development process.
 
 This is slightly different of other wide used files, because relates
 to specific projects, but is not part of the source that the developer
-coded, to make 'usefull' their application.
+coded, to make 'useful' their application.
 
 I think a example session should be clear enough:
 1. Pull the file to your foi repository .
@@ -122,15 +176,15 @@ changes. In this step, we'll prepare to planning what we'll do in the
 source and how we'll document the work done.
 
 I have some changes in my spec file, as: required dependencies, 
-exclusive platform decissions, and a few others.
+exclusive platform decisions, and a few others.
 Once the work is done, it appears the need to document all the task
 done on the source -file spec. The problem in this repository  it's
-that it will sostain a bunch of unordered files, that could or could
-not relate betwen them. So the question is; what kind of logs i want
+that it will sustain a bunch of unordered files, that could or could
+not relate between them. So the question is; what kind of logs i want
 to state in the history of this repo?
 
-In my opinion, all anotations should be integrated on the git log
-as a block. A general propouse log that describes all changes done
+In my opinion, all annotations should be integrated on the git log
+as a block. A general propose log that describes all changes done
 _in a row._
 This avoids to duplicate the log, here; in the File of Interest repo,
 and in the actual repo that reflects the development of the application.
@@ -150,9 +204,9 @@ That was the the recovered log, once added to the repo.
 This time, i added a summary line, that reflects changes done
 over the file. It doesn't matter if it is deleted the file;
 because those changes are part of the git log history, and it's
-posssible to retrive that data in a single log.
+possible to retrieve that data in a single log.
 
-The oposite situation appears on the actual repo of the project,
+The opposite situation appears on the actual repo of the project,
 where a more grained description of each change should be done.
 In this case the spec file -as mentioned before, is not part of the
 source, but if needed to do so, now there are a _guide_ where to start
@@ -197,7 +251,7 @@ con:
 		git-prompt:>git format-patch -k --stdout HEAD -1
 
 Este script es el código que se utilizaría en la .spec, para aplicar
-los cambios de un parche:`Scripts/apply-patch.sh`.
+los cambios de un parche:`Scripts/apply-patches.sh`.
 		
 		
 Es posible utilizar ambos mecanismos en un único archivo de 
@@ -224,8 +278,8 @@ prompt:> cp original.h modified.h
 prompt:> diff -u original.h modified.h > modified.patch
 prompt:> patch patched.h modified.patch
 
-File extension `.patch` is omited inside a `.gitigone` file, so could
-be ereased or moved to modified.v1.0.0-1 on a repository.
+File extension `.patch` is omitted inside a `.gitigone` file, so could
+be erased or moved to modified.v1.0.0-1 on a repository.
 Version is the relevant word, where the actual number represents a
 change on the repository.
 
@@ -271,7 +325,7 @@ __Cherry picking__
 This command `git cherry-pick` is used to apply the changes done in
 one  commit on a given  repository, to  a clean  working tree (no
 modifications from the HEAD commit). This is particularly interesting
-to a FoI repo, where you can commit miskates, or unwanted changes, and 
+to a FoI repo, where you can commit mistakes, or unwanted changes, and 
 re-commit your work without disturbing shared work.
 
 		prompt:> git status 
@@ -293,32 +347,32 @@ Option `-x` appends a line indicating the original commit that points to.
 `git help cherry-pick`: 
 	'Do not use this option if you are cherry-picking from your private
 branch' -FoI in this case. Well, this is a special 'branch',
-i'ts a repository that sources files from any given repository,
+it's a repository that sources files from any given repository,
 but it is not a canonical branch of any, it is a File of Interest: a bunch
 of files, that for some reason, they have any interest to remark by itself.
 
 Repos like this, can be used as index. It's not a repo that anyone will
-erease; a branch in a delovopement scenario could continue or not.
+erase; a branch in a development scenario could continue or not.
 This repository is a kind of place where the owner can drop files of
 interest. 
 
-It's sostainable without any file; the logs are always there. Git knowledge
-spokes about this as "git history". Wonderfull, 
+It's sustainable without any file; the logs are always there. Git knowledge
+spokes about this as "git history". Wonderful, 
 
 This convention conflicts with lines above, a banned degree and others
 trains of, can appear from a user perspective. Several ways to avoid
 this conflicts are known on replicating commands as `rpm -q pkg`; a
 trivial example to query in some way, _what_ and _what not,_ can be do it.
-	>__Note:__ Plese, don't call FoI anything; it's extrange as green dog.
+	>__Note:__ Please, don't call FoI anything; it's estrange as green dog.
 
 __Warning:__ with file backups, this technique of hard-linking files
 is a process silently dangerous, you should not link any file.bak
 or the state of the file will change without notice.
 
 
-### Bitacora files
-### LICENSE files
-### README files
-### Git ignores
+### 4. Bitacora files
+### 5. LICENSE files
+### 6. README files
+### 7. Git ignores
 
 
