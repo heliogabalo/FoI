@@ -33,8 +33,8 @@
  
 ## 1. File of Interest
 
-A bunch of files, that for some reason, they have
-any interest to remark by itself.
+A bunch of files, that for some reason, they have any interest to
+remark by itself.
 
 Examples:
 
@@ -91,21 +91,41 @@ new files, that it doesn't belong to the same project. Simply checkout
 to the specific branch, without bothering with unrelated files 
 surfing in the working tree.
 
-What will be the state of the branch, initially added?
+What will be the initial state of a new branch?
+The state of the HEAD in the repo (clean working tree, obviously).
+This notes just try to remark, that if was followed the rules
+defined in the present document, a new branch will looks like as
+your master branch, as expected, and it will be very easy to just
+delete all content on the new branch, and start coding with the
+specific task.
 
+Example session:
 
+1. git checkout -b myBranch
+2. git rm $CLONED_FILES
+3. git commit -m ''
+
+warning here: about to save some file opened on the editor, when
+branching without those files.
 
 ## 1.98 Git stash
 
 "It takes the dirty state of your working directory, and saves it on
 a stack of unfinished changes, that can reapply at any time -even on a
-different branch".
+different branch". That is:
 
-- modified tracked files.
+- modified tracked files, and
 - staged changes.
 
+		git stash save 'descriptive message of the task.'
+		git stash		
 
-
+Both commands accomplish almost the same; the decision to run one or
+the other, depends on how many time, you expect to complete or 
+retake the work undone. In a near future situation, it's acceptable
+to enchant the shell with the abbreviated one. Can you say the same
+in a delayed situation, where the 'x' is two hours, two days or maybe
+a week?
 
 ### 2. Config files
 To start working with all this mesh, open your `~/.bashrc` and add
@@ -151,11 +171,6 @@ __absolute path:__
 __find all links of specific inode__
 		stat foi.file
 		find ~/ -inum inode_num
-
-
-__Files with the same name__
-
-
 
 
 ### 3. Spec files
@@ -214,18 +229,31 @@ documenting each chunk of data change; `git add -i` on the development
 repo of the application, will be suffice to _patch_ each minimal change.
 
 
-__Parches__
-El concepto de parche en git, en mi opinión; resulta algo confuso
-respecto a cómo efectuar un parche, mediante el método convencional.
-Pienso que rara vez resulta conveniente mezclar las técnica utilizadas. 
+__Patches__
 
-¿Para qué resulta útil un parche en git? Todos los commits en git, son
-parches. Modificaciones que se han ido realizando a lo largo del 
-desarrollo de uno o más archivos de fuente.
+There are methods to patch files as the tools used on a regular shell,
+like Bash, and then, other methods; that package the hunks of code,
+into an email envelop, to send those patches. Distributed version
+control system, Git(DVCS).
 
-Por diversos motivos, podría aparecer la necesidad de trasladar o
-empaquetar una validación(commit), para que otro desarrollador, tenga
-la oportunidad de incorporar el cambio, a su fuente local.
+Why is it useful a patch in git? All commits in git are patches.
+Modifications that have been made, throughout the development of any
+number of source files.
+
+For various reasons it could appear the need to _transport_ a patch
+from `computer-A` to `computer-B`. The conventional way of doing this,
+is through the commands available in git. Now let's discuss about
+a situation where _computer-B_ is inevitably offline.
+
+In this context will be extracted a commit or more; a copy of the
+commit message and their content, from the history of the repository.
+Before sending the patch, it must be applied a format to the file
+that works with the API.
+
+A usual way of doing this, is via mail, storage device(USB).
+
+		git 
+
 
 En este contexto, extraer el contenido de dicha validación, pasa por
 aplicar a los datos un formato específico, para que de alguna manera,
@@ -328,20 +356,7 @@ modifications from the HEAD commit). This is particularly interesting
 to a FoI repo, where you can commit mistakes, or unwanted changes, and 
 re-commit your work without disturbing shared work.
 
-		prompt:> git status 
-		# On branch master
-		# Changes to be committed:
-		#   (use "git reset HEAD <file>..." to unstage)
-		#
-		#	new file:   keymap.h
-		#	new file:   structures.h
-		#
-		# Changes not staged for commit:
-		#   (use "git add <file>..." to update what will be committed)
-		#   (use "git checkout -- <file>..." to discard changes in working directory)
-		#
-		#	modified:   README.md
-		#
+		git cherry-pick hash
 
 Option `-x` appends a line indicating the original commit that points to.
 `git help cherry-pick`: 
@@ -350,6 +365,19 @@ branch' -FoI in this case. Well, this is a special 'branch',
 it's a repository that sources files from any given repository,
 but it is not a canonical branch of any, it is a File of Interest: a bunch
 of files, that for some reason, they have any interest to remark by itself.
+
+Suppose you are working on a temporal branch -to fix some issue, test 
+some code or similar job. Now you commit your work to get a clean
+working tree. The next step is to return to the _master_ branch and
+continue working with what you were doing before. 
+
+As stated lines above, the _temporal nature_ of the branch, is suitable
+to be erased as soon as you think the issue was solved and the branch
+is not needed anymore. Here is where appears the problem, because using
+the `-x` flag it will mark the commit you picked-up, pointing to nothing, 
+since the branch has been removed. A similar situation pops-up when
+the branch is just local; no one can read the _commit from_ in your 
+local repository.
 
 Repos like this, can be used as index. It's not a repo that anyone will
 erase; a branch in a development scenario could continue or not.
@@ -360,10 +388,13 @@ It's sustainable without any file; the logs are always there. Git knowledge
 spokes about this as "git history". Wonderful, 
 
 This convention conflicts with lines above, a banned degree and others
-trains of, can appear from a user perspective. Several ways to avoid
+trains of; can appear from a user perspective. Several ways to avoid
 this conflicts are known on replicating commands as `rpm -q pkg`; a
 trivial example to query in some way, _what_ and _what not,_ can be do it.
-	>__Note:__ Please, don't call FoI anything; it's estrange as green dog.
+
+
+
+
 
 __Warning:__ with file backups, this technique of hard-linking files
 is a process silently dangerous, you should not link any file.bak
