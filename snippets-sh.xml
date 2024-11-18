@@ -1,0 +1,654 @@
+<?xml version='1.0' encoding='utf-8'?>
+<snippets language="sh">
+  <snippet>
+    <text><![CDATA[#!/bin/bash
+$0]]></text>
+    <tag>bash</tag>
+    <description>#!/bin/bash</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[#!/bin/sh
+$0]]></text>
+    <tag>sh</tag>
+    <description>#!/bin/sh</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[case ${1:choice} in
+${2:first})
+	$3
+	;;
+*)
+	$4
+	;;
+esac]]></text>
+    <tag>case</tag>
+    <description>case ..</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[chsh -s /usr/bin/git-shell]]></text>
+    <description>ch</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[###############################################################
+# make clean --- Delete most generated files.
+#								 Leave enough to build external modules.
+# make mrproper  Delete the current configuration, and
+#								 all generated files. It does clean.
+# " distclean		 Remove editor backup files, patch leftover
+#								 files
+###############################################################
+]]></text>
+    <tag>cl1</tag>
+    <description>cleaning</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[#####################################
+## The compiler says:
+## ... CONFIG_RETPOLINE=y not supported.
+## Comiler update recommended.
+## 
+## It seems that a temporary file is the ofenser
+## trying to write in the wrong place, without
+## appropiate permissions. Compiler in user-space
+## needs a place where to write.
+## The KBUILD_EXTMOD variable controls where
+## to write a file.
+
+KBUILD_EXTMOD=\$(pwd)
+
+#####################################
+## But the argument in the make sentence
+## should be placed at EOL:
+## 
+## 		make M=my/path/to KBUILD_EXTMOD=\$(pwd)
+## 
+## 
+## 
+## ]]></text>
+    <tag>solved1</tag>
+    <description>compilerError</description>
+  </snippet>
+  <snippet>
+    <description>dif</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[cat > ${1:Name.log} <<\EOF
+${2:command} ${3:argument}
+# exit ${4:st_num_128}
+EOF]]></text>
+    <tag>d2</tag>
+    <description>docHere2</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[cat > Name.log <<\EOF
+echo 'hello world'
+# exit 128
+EOF]]></text>
+    <tag>dch</tag>
+    <description>docHere</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[elif [[ ${1:condition} ]]; then
+	$0]]></text>
+    <tag>elif</tag>
+    <description>elif ..</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[for (( ${1:i = 0}; ${2:i < 10}; ${3:i++} )); do
+	$0
+done]]></text>
+    <tag>for</tag>
+    <description>for .. done</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[### STASHING
+#
+# create a sequential stash 
+git stash
+
+# create a Named stash
+git stash save 'descriptive message of the task.'
+
+# Creating a branch froma a stash
+git stash branch branchName
+
+### CLEANING
+# git clean :
+# 	[n-|--dry-run] ---- What it would do
+#		-d ---- recursive
+#		-x ---- remove all, ignored and not ignored.
+# 	-f ---- force
+# Run interactively
+git clean -i
+
+
+### TAGGING
+# REMEMBER: git push doesn't transfer tags, it must be 
+# done manually: git push origin --[tags|follow-tags]
+
+# List tags
+# use [-l|--list] to match a pattern.
+git tag
+git tag -l 'vX.Y.Z'
+
+# Show a tagged commit
+git show vX.Y.Z
+
+# Create a tag, defaults pointing HEAD
+git tag v1.2.3.4 -m 'my wonderfull tag note.'
+
+# Create a signed tag
+git tag -s v1.2.3.4
+
+# Create a tag that points to hash
+git tag v1.2.3.4 hash
+
+# Create a lightweight tag
+git tag v1.2.3.4-lw
+
+### PUSHING
+# Update Origin allowing non-fast-forward updates
+# non-fast-forward: the local repository is behind origin;
+# 	Imagine a situation where the local repo has been
+#		squashed some commits. This is not the way of doing
+#		things in a shared repo, but there are situations 
+# 	where could be useful. 
+# fast-forward: this is the spected state of a local
+# repo, where the developer changes the source with 
+# their work.
+# Git engine has a mechanism to avoid rewriting history
+# if Origin has contributted work. With this technique
+# it's feasible to acomplish that:
+git push origin +master
+ 
+ 
+ 
+ 
+ 
+ 
+ ]]></text>
+    <description>gitAdvaced</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## Config global ignore file
+git config --global core.excludesfile ~/.gitignore
+
+## Config user name
+git config --global user.name 'User Name'
+
+## Config user email
+git config --global user.email 'user@mail.com'
+
+## Config git for signing things.
+git config --global user.signingkey pub_hash
+
+## Simplied status
+git status -s1
+
+## Add only the path
+git add [-N|--intent-to-add]]]></text>
+    <description>gitBasics</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## That script cat test if the code
+## is good or bad.
+git bisect run my-script my-args]]></text>
+    <description>gitBisect</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[# each line of a file
+git blame myFile
+
+# Show blank SHA-1 for boundary commits.
+git blame -b myFile
+
+# Additional statistics at the end.
+git blame --show-stats myFile
+
+# Only the given line range.
+git blame -L 40,60 myFile
+
+# Mode. Each line is output after a header.
+git blame --porcelain myFile
+
+# It works by searching for a text string in
+# the diff.
+git log --oneline -S'strigCode'
+git log --pretty=oneline -S'strigCode']]></text>
+    <description>gitBlameAnnotate</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[# Creates a new pointer to the commit 
+# you are currently on.
+git branch branchName
+
+# Creates a new branch from given commit.
+git branch branchName hash
+
+# Creates a new branch and switch to it
+# It's the same as: git branch name; git checkout name
+git checkout -b branchName
+
+# To change to a given branch
+git checkout branchName
+
+]]></text>
+    <description>gitBranch</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[# Print lines matching a pattern
+git grep pattern
+
+# Print lines matching a pattern, and the line 
+# number where git founds a match.
+# 	[-n|--line-number]
+git grep -n pattern
+
+# With function context
+# 	[-p|--show-function]
+git grep -p pattern *.c
+
+# The shiped grep, has the advantage of grepping 
+# through any tree, not just the working directory.
+git grep --break --heading \
+	-n -e '#define' and \(-e LINK -e BUF_MAX \) vX.Y.Z
+
+# Search files in the current directory that
+# is not managed by Git.
+git grep --no-index pattern
+
+# In addition to searching in the tracked files in
+# the working tree, search also in untracked files.
+git grep --untracked pattern]]></text>
+    <description>gitGrep</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[# Shows differences, patch output.
+git log -p -1
+
+# Specific hash
+git log -p hash
+
+## Git pickaxe. Shows the commit that 
+## changed the number of occurences of
+## that string
+git log -S function_name
+
+## Limit the log to specific file or path
+git log -- path/to/file
+
+# Abreviated output on one line
+git log --oneline
+
+# Shows stats on the log
+git log --stat
+
+# Shows abreviated stats on the log
+git log --oneline --stat
+
+## Custom log output
+git log --pretty=format:"%h - %an, %ar : %s"
+
+## Custom log output with graph
+git log --pretty=format:"%h %s" --graph
+
+## List of individual commits
+git log -p hash -1 1> comSlice.log; \
+	echo '' >> comSlice.log; \
+	git log -p hash -1 1>> comSlice.log
+
+## Show notes...
+git show -s --notes=amlog $commit
+]]></text>
+    <description>gitLog</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## NO INTERACTIVE
+# To disable interactive logins, displaying
+# a greeting instead
+chsh -s /usr/bin/git-shell
+mkdir $HOME/git-shell-commands
+cat >$HOME/git-shell-commands/no-interactive-login <<\EOF
+#!/bin/sh
+printf '%s\n' "Hi $USER! You've successfully authenticated, but I do not"
+printf '%s\n' "provide interactive shell access."
+exit 128
+EOF
+chmod +x $HOME/git-shell-commands/no-interactive-login]]></text>
+    <tag>noi</tag>
+    <description>gitNoI</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## FORMAT-PATCH
+## Pathcing a file
+pacth file.orig file.pacth
+
+## Extracting chenges from modified file. Build a patch.
+diff -u originalFile modifiedFile > filePatch.patch
+
+#### git-format git bundle
+## From HEAD count numbered of indexed commits
+git format-patch -k --stdout HEAD -1
+
+## From hash count numbered of indexed commits
+git format-patch -k --stdout hash -1 > file-git.patch
+
+## From hash to hash print those commits
+git format-patch -k --stdout hash..hash
+
+# List of envelopes with each patch.
+git format-patch -M HEAD -2
+
+## MAILINFO
+# msg -- The commit log message
+# patch -- The patch extracted from e-mail.
+git mailinfo msg patch < git.patch
+
+## 
+git mailinfo msg patch < mail.patch >info
+
+## APPLAY apply
+git apply file.pacth
+
+## APPLAY am
+# It uses the mail commit to update de index.
+git am file.pacth]]></text>
+    <description>gitPATCH</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## REBASE
+# 
+git rebase -i HEAD~3
+
+
+
+
+
+
+## CHERRY PICK
+
+# To pull a single commit in your current branch
+git cherry-pick hash]]></text>
+    <description>gitRebaseCherryPick</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## Reuse recorded resolution]]></text>
+    <description>gitRERERE</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[# Move the branch HEAD points to(stop here if --soft).
+git reset [hash|HEAD~]
+
+# Make the index look like HEAD(stop here if --hard).
+git reset --mixed HEAD~
+
+# Make the working directory look like the index.
+git reset --hard HEAD~
+
+# This is short for :
+#		 git reset --mixed HEAD file
+# 1. It skips to move the HEAD points to.
+# 2. Make index look like HEAD(stop here).
+# It copies the file from HEAD to index.
+git reset file
+
+# Specifying a commit we are saying:
+# 'don't pull data from HEAD, instead ...'
+git reset hash file
+
+# Show the log of the reference provided.
+# short for:	 git reflog show
+git reflog]]></text>
+    <description>gitReset</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[%prep
+%setup -q
+# Create a git repo within the expanded tarball.
+git init
+git config user.email ""
+git config user.name ""
+git add .
+git commit -a -q -m "%{version} baseline."
+# Apply all the patches on top.
+git am %{patches}]]></text>
+    <description>gitRPMpatch</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## This is a critical operation and could
+## lead to data lose.
+
+# Amend option:
+## It's used to change the commit message, if no
+## change is done to any file or dir.
+## It's also used to add changes you forget to add
+## initially, and after doing those, the changes will
+## be added to the last commit. 
+git commit --amend
+
+## Reset the HEAD. It refers to the work done
+## at the moment you try to undo things.
+## So HEAD is the last commit you are done but 
+## also the work in the staged and unstaged area. 
+## The HEAD of the branch or the repository.
+git reset HEAD READ.md
+
+## On a clean area, revert changes done at this
+## point. Discard changes in working directory.
+git checkout -- FileName
+
+
+
+## 
+git reset HEAD --hard READ.md
+
+
+
+
+]]></text>
+    <description>gitUndoings</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## List keys
+gpg --list-keys
+
+## Generate a key
+gpg --gen-key
+
+## A text based manager; see man page.
+gpg --edit-key hash
+
+]]></text>
+    <description>gpgBasics</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[if [[ ${1:condition} ]]; then
+	$0
+fi]]></text>
+    <tag>if</tag>
+    <description>if .. then</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[USB = /mnt-point/to/device/file
+
+genisoimage \
+	-input-charset utf-8 \
+	-rational-rock \
+	-volid ID-name \
+	-o file-Name.iso \$USB \]]></text>
+    <tag>isogen</tag>
+    <description>isoGen</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[########################################
+##					list only files						##
+########################################
+ls --color -lAh |grep -v '^d' |less -SR
+]]></text>
+    <tag>see1</tag>
+    <description>lsFiles</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[# Sending mail
+# 	-s subject
+mailx -s "the mail subject" example@addres.x
+Hello who,
+This is the mail text body
+EOT
+
+# Taking the message from a file
+mailx -s "the mail subject" example@addres.x < file
+
+# Simple verbose form:
+mailx -v -s "Exmple subject" example@addres.x < file
+
+# Using pipes
+echo "some text here" 
+|mailx -s "the mail subject" example@addres.x
+
+# Sending to multiple recipients
+mailx -s "the mail subject" 
+example@addres.x, example-2@addres.x < file
+
+# With carbon copy(CC) or Blind carbon copy(BCC).
+mailx -s "the mail subject"
+example@addres.x -c example-2@addres.x
+-b example-3@addres.x
+
+# With attachments
+mailx -s "the mail subject"
+example@addres.x -a attachment.txt
+
+
+mailx -v -s "$EMAIL_SUBJECT" \
+	-S smtp-use-starttls \
+	-S ssl-verify=ignore \
+	-S smtp-auth=login \
+	-S smtp=smtp://smtp.gmail.com:587 \
+	-S from="$FROM_EMAIL_ADDRESS($FRIENDLY_NAME)" \
+	-S smtp-auth_user=$FROM_EMAIL_ADDRESS \
+	-S smtp-auth_password=$FROM_ACCOUNT_PASSWORD \
+	-S ssl-verify=ignore \
+$TO_MAIL_ADDRESS
+
+
+]]></text>
+    <description>mailx</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[make M=drivers/gpu/drm/amd/amdgpu/ \
+	KBUILD_EXTMOD=/tmp \
+	2>&1 > /home/raul/Documents/Logs/buildModule.out
+
+#make clean]]></text>
+    <tag>mkx</tag>
+    <description>makeExtMod</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[ln -v -b -f -s a_link originalFile -t a_dir -S "date"
+
+## Physical, a hard link to symbolic link.
+ln -P --backup=numbered /tmp/a_file .]]></text>
+    <description>myLinks</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[pkill --signal 9 man]]></text>
+    <tag>poc</tag>
+    <description>pk-man</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[######################################
+## BUILD - dir used during build process to store temporary files.
+## RPMS - dir used to store the RPM package that can be installed 
+##				after we are finished the build process.
+## SOURCES - this dir. holds the source code for apps. A convention
+##				states that the file is compressed in tar.gz format.
+## SPECS - dir contains the .spec file for our package, this is the
+##				file rpmbuild utility looks at to know what steps needs 
+##				to be done during the build process.
+## SRPMS - dir contains a tarball with the sourve code(a tar.gz file)
+##				and a set of instructions to build the binary, a .spec file.
+#
+rpmbuild -bp --target=\$(uname -m) kernel.spec]]></text>
+    <tag>rpmTree</tag>
+    <description>rpmBuildTree</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## Terse output
+rpmbuild --version
+
+## Verbose output and related doc/scripts
+rpmbuild --showrc]]></text>
+    <tag>rpmCheck</tag>
+    <description>rpmCheckBuildInst</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## IMPORT -- local file / url
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-OSname-V]]></text>
+    <description>rpmImport</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[#####################################
+#SOURCE=http://mirror.stream.centos.org/9-stream/BaseOS/source/tree/Packages/kernel-5.14.0-480.el9.src.rpm
+#SOURCE=~/Downloads/kernel-5.14.0-480.el9.src.rpm
+#####################################
+#
+## INSTALL
+rpm -i $SOURCE 2>&1 |grep -v 'exist'
+#
+## UNINSTALL
+#rpm --erase --allmatches 5.14.0-480.el9
+#]]></text>
+    <tag>rpmi</tag>
+    <description>rpmInst/Uninst</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[rpm -q --queryformat '%{name}-%{version}-%{release}-> %{summary}\n' $(rpm -q gpg-pubkey)]]></text>
+    <description>rpmQformat</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[# Printing a value of a symbolic
+# link or canonical file name.
+
+## Absolute path:
+readlink -f foi.file
+
+# Find all links of specific inode
+stat foi.file
+find ~/ -inum inode_num]]></text>
+    <description>stats</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## Create a tar archive.
+tar cvf fileTarName.tar ./dirToTarball
+
+## Compress the file
+gzip fileTarName.tar
+
+
+tar cvf fileName.tar \
+	--exclude=file-1 \
+	--exclude=file-2 \
+	--exclude=dir-1 \
+	./dir_to_tar \
+	2> ~/Documents/Logs/fileName-err.log \
+	|tee ~/Documents/Logs/fileName-out.log;q]]></text>
+    <description>tarball</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[watch -n 5 ls -lsh .]]></text>
+    <tag>wi</tag>
+    <description>watchHere</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[## 
+chroot /tmp/empty /ls -RL
+
+## transient root
+chroot /tmp/empty \
+	--userspec=user:wheel \
+	
+]]></text>
+    <description>zalterRoot</description>
+  </snippet>
+</snippets>
