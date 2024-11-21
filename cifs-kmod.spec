@@ -2,7 +2,7 @@
 %define kmod_name cifs
 
 # If kversion isn't defined on the rpmbuild line, define it here.
-%{!?kversion: %define kversion 2.6.18-8.el5}
+%{!?kversion: %define kversion 3.10.0-1160.118.1.el7}
 
 Name:    %{kmod_name}-kmod
 Version: 1.45
@@ -18,7 +18,7 @@ ExclusiveArch: i686 x86_64
 
 # Sources.
 Source0:  %{kmod_name}-%{version}.tar.bz2
-Source10: kmodtool-%{kmod_name}-el5.sh
+Source10: kmodtool-%{kmod_name}-el7.sh
 
 # Define the variants for each architecture.
 %define basevar ""
