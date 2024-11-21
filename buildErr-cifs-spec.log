@@ -1,0 +1,14 @@
++ umask 022
++ cd /home/raul/rpmbuild/BUILD
++ cd /home/raul/rpmbuild/BUILD
++ rm -rf cifs-kmod-1.45
++ /usr/bin/mkdir -p cifs-kmod-1.45
++ cd cifs-kmod-1.45
++ /usr/bin/bzip2 -dc /home/raul/rpmbuild/SOURCES/cifs-1.45.tar.bz2
++ /usr/bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ /usr/bin/chmod -Rf a+rX,u+w,g-w,o-w .
+/var/tmp/rpm-tmp.hfVnuh: line 38: syntax error near unexpected token `$'do\r''
+error: Bad exit status from /var/tmp/rpm-tmp.hfVnuh (%prep)
+    Bad exit status from /var/tmp/rpm-tmp.hfVnuh (%prep)
