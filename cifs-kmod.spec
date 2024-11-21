@@ -26,14 +26,15 @@ Source10: kmodtool-%{kmod_name}-el7.sh
 %define paevar PAE
 %endif
 %ifarch i686 x86_64
-%define xenvar xen
+#%%define xenvar xen
 %endif
 
 # If kvariants isn't defined on the rpmbuild line, build all variants for this architecture.
-%{!?kvariants: %define kvariants %{?basevar} %{?xenvar} %{?paevar}}
+#%%{!?kvariants: %%define kvariants %%{?basevar} %%{?xenvar} %%{?paevar}}
+%{!?kvariants: %define kvariants %{?basevar} %{?paevar}}
 
 # Magic hidden here.
-%{expand:%(sh %{SOURCE10} rpmtemplate_kmp %{kmod_name} %{kversion} %{kvariants})}
+%{expand:%(sh %{SOURCE10} rpmtemplate %{kmod_name} %{kversion} %{kvariants})}
 
 # Disable the building of the debug package(s).
 %define debug_package %{nil}
@@ -49,7 +50,7 @@ of the same variant of the Linux kernel and not on any one specific build.
 %prep
 %setup -q -c -T -a 0
 for kvariant in %{kvariants} ; do
-    %{__cp} -a %{kmod_name}-%{version} _kmod_build_$kvariant
+    %{__cp} -a %{kmod_name}-%{version} _kmod_build_kvariant
 done
 echo "/usr/lib/rpm/redhat/find-requires | %{__sed} -e '/^ksym.*/d'" > filter-requires.sh
 echo "override %{kmod_name} * weak-updates/%{kmod_name}" > kmod-%{kmod_name}.conf
