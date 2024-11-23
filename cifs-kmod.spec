@@ -43,14 +43,16 @@ Source10: kmodtool-%{kmod_name}-el7.sh
 %define __find_requires sh %{_builddir}/%{buildsubdir}/filter-requires.sh
 
 %description
-This package provides the CentOS-5 bug-fixed %{kmod_name} kernel module (bug #1776).
-It is built to depend upon the specific ABI provided by a range of releases
-of the same variant of the Linux kernel and not on any one specific build.
+This package provides the CentOS-5 bug-fixed %{kmod_name}
+kernel module (bug #1776).
+It is built to depend upon the specific ABI provided by a
+range of releases of the same variant of the Linux kernel
+and not on any one specific build.
 
 %prep
 %setup -q -c -T -a 0
 for kvariant in %{kvariants} ; do
-    %{__cp} -a %{kmod_name}-%{version} _kmod_build_kvariant
+    %{__cp} -a %{kmod_name}-%{version} _kmod_build_$kvariant
 done
 echo "/usr/lib/rpm/redhat/find-requires | %{__sed} -e '/^ksym.*/d'" > filter-requires.sh
 echo "override %{kmod_name} * weak-updates/%{kmod_name}" > kmod-%{kmod_name}.conf
