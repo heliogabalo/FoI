@@ -52,7 +52,7 @@ and not on any one specific build.
 %prep
 %setup -q -c -T -a 0
 for kvariant in %{kvariants} ; do
-    %{__cp} -a %{kmod_name}-%{version} _kmod_build_$kvariant
+	%{__cp} -a %{kmod_name}-%{version} _kmod_build_$kvariant
 done
 echo "/usr/lib/rpm/redhat/find-requires | %{__sed} -e '/^ksym.*/d'" > filter-requires.sh
 echo "override %{kmod_name} * weak-updates/%{kmod_name}" > kmod-%{kmod_name}.conf
