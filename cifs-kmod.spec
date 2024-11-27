@@ -68,7 +68,7 @@ done
 export INSTALL_MOD_PATH=%{buildroot}
 export INSTALL_MOD_DIR=extra/%{kmod_name}
 for kvariant in %{kvariants} ; do
-    KSRC=%{_usrsrc}/kernels/%{kversion}${kvariant:+-$kvariant}-%{_target_cpu}
+    KSRC=%{_usrsrc}/kernels/%{kversion}${kvariant:+-$kvariant}.%{_target_cpu}
     %{__make} -C "${KSRC}" modules_install M=$PWD/_kmod_build_$kvariant
 done
 %{__install} -d %{buildroot}%{_sysconfdir}/depmod.d/
