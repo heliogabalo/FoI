@@ -59,7 +59,7 @@ echo "override %{kmod_name} * weak-updates/%{kmod_name}" > kmod-%{kmod_name}.con
 
 %build
 for kvariant in %{kvariants} ; do
-    KSRC=%{_usrsrc}/kernels/%{kversion}${kvariant:+-$kvariant}-%{_target_cpu}
+    KSRC=%{_usrsrc}/kernels/%{kversion}${kvariant:+-$kvariant}.%{_target_cpu}
     %{__make} -C "${KSRC}" %{?_smp_mflags} modules M=$PWD/_kmod_build_$kvariant
 done
 
