@@ -1,0 +1,43 @@
+# --- Configuración de Desarrollo Externo ---
+# Perfil Personal (heliogabalo)
+Host helio
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/helio_github
+
+# Perfil Dev (raul-dev2025)
+Host raul-dev
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/raul_dev_github
+
+# --- Configuración del Reino RAULVILCHEZ.ORG (SSO) ---
+# Confiamos en el DNS para resolver 'ipa' e 'ipa02'
+Host ipa ipa02 
+    HostName %h.raulvilchez.org
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials yes
+    IdentitiesOnly yes
+    PreferredAuthentications gssapi-with-mic,publickey,password
+    CheckHostIP no
+
+Host *.raulvilchez.org
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials yes
+    IdentitiesOnly yes
+    PreferredAuthentications gssapi-with-mic,publickey,password
+
+Host nas
+    HostName nas.raulvilchez.org
+    User maint-ipa
+    PreferredAuthentications gssapi-with-mic,password
+
+# --- Otros Accesos Heredados ---
+Host ipa
+    User tech-ipa
+
+Host nas
+    User maint-ipa
+
+Host ipa02
+    User tech-ipa
