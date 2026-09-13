@@ -1,0 +1,7 @@
+{
+  "C_Cpp.dimInactiveRegions": true,
+  "extensions.autoCheckUpdates": false,
+  "workbench.view.extensions.badge": "hidden",
+  "update.mode": "none",
+  "extensions.showRecommendationsOnlyOnDemand": true
+}
